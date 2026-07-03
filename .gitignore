@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Virtual env
+venv/
+.venv/
+env/
+
+# Sekrety
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
+
+# Wygenerowane dane (output skryptu, nie kod)
+output/
+products.csv
+reviews.csv
+images.csv
+tags.csv
