@@ -1,7 +1,7 @@
 import logging
-import extract as e
-import transform as t
-import load as l
+import src.extract as e
+import src.transform as t
+import src.load as l
 
 logging.basicConfig(
     level=logging.INFO,
