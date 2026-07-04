@@ -1,9 +1,11 @@
 import logging
+import os
+import sys
+from dotenv import load_dotenv
 import src.extract as extract
 import src.transform as transform
 import src.load as load
 
-API_URL = 'https://dummyjson.com/products'
 
 def main() -> None:
     logging.basicConfig(
@@ -12,8 +14,18 @@ def main() -> None:
         datefmt="%H:%M:%S"
     )
 
+    logger = logging.getLogger(__name__)
+    load_dotenv()
+
+    api_url = os.getenv('API_URL')
+
+    if api_url is None:
+        sys.exit("There was a problem loading .env file, check if .env file or API_URL variable exists")
+    else:
+        logger.info(".env file successfully loaded")
+
     # Get data from API
-    raw_data = extract.get_data(API_URL)
+    raw_data = extract.get_data(api_url)
 
     # Get transformed dataframes
     dataframes = transform.transform_all(raw_data)
