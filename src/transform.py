@@ -28,4 +28,17 @@ def create_one_column_dataframe(products_df, column_name):
 def transform_one_column_dataframe(df, previous: str, correct: str):
     return df.rename(columns={'id': 'product_id', previous: correct})
 
+def transform_all(raw_data) -> dict[str, pd.DataFrame]:
+    # Create DataFrames
+    products_full = create_products_dataframe(raw_data)
+    reviews = create_reviews_dataframe(raw_data)
+    images = create_one_column_dataframe(products_full, 'images')
+    tags = create_one_column_dataframe(products_full, 'tags')
 
+    # Transform DataFrames
+    products = transform_products_dataframe(products_full)
+    reviews = transform_reviews_dataframe(reviews)
+    images = transform_one_column_dataframe(images, 'images', 'image_url')
+    tags = transform_one_column_dataframe(tags, 'tags', 'tag')
+
+    return {'products': products, 'reviews': reviews, 'images': images, 'tags': tags}
