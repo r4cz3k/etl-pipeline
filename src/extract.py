@@ -57,7 +57,7 @@ def retry(tries=4):
 
 
 @retry(tries=4)
-def fetch_page(url: str, params: dict[str, int]):
+def fetch_page(url: str, params: dict[str, int]) -> rq.Response:
     response = rq.get(url, params=params)
     response.raise_for_status()
     return response
