@@ -4,10 +4,12 @@ from time import sleep
 
 logger = logging.getLogger(__name__)
 
+
 def retry(tries=4):
     """
     :tries: Number of times to retry an API call (4 tries = 3 timeouts)
     """
+
     def retry_logic(func):
         def wrapper(*args, **kwargs):
             for parse_try in range(tries):
@@ -22,29 +24,37 @@ def retry(tries=4):
                         raise
 
                     if e.response.status_code in range(500, 600):
-                        if parse_try == tries - 1:  # last try, otherwise impossible to raise
+                        if (
+                            parse_try == tries - 1
+                        ):  # last try, otherwise impossible to raise
                             logger.error(f"HTTP ERROR: {e}")
                             raise
                         else:
                             logger.warning(f"HTTP ERROR: {e}")
-                            sleep(3 ** parse_try)  # 3 intervals before raise: 1s / 3s / 9s
+                            sleep(
+                                3**parse_try
+                            )  # 3 intervals before raise: 1s / 3s / 9s
 
                 except rq.exceptions.ConnectionError as e:
-                    if parse_try == tries - 1:  # last try, otherwise impossible to raise
+                    if (
+                        parse_try == tries - 1
+                    ):  # last try, otherwise impossible to raise
                         logger.error(f"Connection ERROR: {e}")
                         raise
                     else:
                         logger.warning(f"Connection ERROR: {e}")
-                        sleep(3 ** parse_try)  # 3 intervals before raise: 1s / 3s / 9s
+                        sleep(3**parse_try)  # 3 intervals before raise: 1s / 3s / 9s
 
                 except rq.exceptions.RequestException as e:
                     logger.error(f"Request ERROR: {e}")
                     raise
 
-            raise RuntimeError('All retries failed')
+            raise RuntimeError("All retries failed")
+
         return wrapper
 
     return retry_logic
+
 
 @retry(tries=4)
 def fetch_page(url: str, params: dict[str, int]):
@@ -66,11 +76,11 @@ def get_data(url: str, limit: int = 30) -> list[dict]:
     parsed = 0
 
     while True:
-        response = fetch_page(url, params={'skip': skip})
+        response = fetch_page(url, params={"skip": skip})
 
         data = response.json()
 
-        response_len = len(data['products'])
+        response_len = len(data["products"])
         parsed += response_len
 
         if response_len < 1:
@@ -78,8 +88,8 @@ def get_data(url: str, limit: int = 30) -> list[dict]:
         else:
             logger.info(f"Parsed {parsed}/{data['total']}")
 
-        for product in data['products']:
-            products[product['id']] = product
+        for product in data["products"]:
+            products[product["id"]] = product
 
         skip += limit
 
