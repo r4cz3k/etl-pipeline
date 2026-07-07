@@ -1,6 +1,6 @@
 # Products Analytics - Power BI
 
-Interactive analytical report built on the PostgreSQL database produced by the [ETL pipeline](../README.md). Explores product catalog, pricing, and review data across 24 categories and 194 products.
+Interactive analytical report built on the PostgreSQL database produced by the [ETL pipeline](../readme.md). Explores product catalog, pricing, and review data across 24 categories and 194 products.
 
 ## Setup
 
