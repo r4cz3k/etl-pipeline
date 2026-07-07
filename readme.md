@@ -4,7 +4,9 @@
 Python ETL pipeline that extracts product data from a REST API, normalizes the nested JSON into four related tables (products, reviews, images, tags), loads them into PostgreSQL or CSV, and visualizes the results in an interactive Power BI report.
 ## Overview
 
-This pipeline fetches ~194 products from the dummyjson API, handling pagination and retrying failed requests with increasing delays. The raw nested JSON is normalized into four related tables (products, reviews, images, tags) using pandas, then loaded into PostgreSQL (running in Docker) or exported to CSV, depending on configuration. Unit tests cover the extraction and transformation logic, and a GitHub Actions workflow runs them on every push. The PostgreSQL output feeds a Power BI report with a star-schema model and DAX measures - see [Analytics](#analytics-power-bi) below.## Architecture
+This pipeline fetches ~194 products from the dummyjson API, handling pagination and retrying failed requests with increasing delays. The raw nested JSON is normalized into four related tables (products, reviews, images, tags) using pandas, then loaded into PostgreSQL (running in Docker) or exported to CSV, depending on configuration. Unit tests cover the extraction and transformation logic, and a GitHub Actions workflow runs them on every push. The PostgreSQL output feeds a Power BI report with a star-schema model and DAX measures - see [Analytics](#analytics-power-bi) below.
+
+## Architecture
 
 ```mermaid
 flowchart LR
