@@ -1,0 +1,16 @@
+relationship 7b05ae48-b536-e7ca-13d9-de288628a58c
+	fromColumn: 'public reviews'.product_id
+	toColumn: 'public products'.id
+
+relationship 67be7179-60b6-76f1-2b75-44751d1201e7
+	fromColumn: 'public tags'.product_id
+	toColumn: 'public products'.id
+
+relationship f9b6a749-7c2b-7a93-ac6c-79b3358b37fe
+	fromColumn: 'public images'.product_id
+	toColumn: 'public products'.id
+
+relationship AutoDetected_d539812c-04a9-4a7f-8a3e-fe7840a4b288
+	fromColumn: 'public products'.category
+	toColumn: dim_category.category
+

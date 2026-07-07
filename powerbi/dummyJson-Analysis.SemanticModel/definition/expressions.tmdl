@@ -1,0 +1,7 @@
+expression ServerAddress = "YOUR_DB_HOST" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 933ce4c4-e84d-4cc7-aeab-670c491af45d
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+

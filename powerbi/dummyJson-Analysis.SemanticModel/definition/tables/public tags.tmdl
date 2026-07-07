@@ -1,0 +1,36 @@
+table 'public tags'
+	lineageTag: 993c33ce-6406-445a-9f8a-34c43045da8b
+
+	column product_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2fb616ef-2bfb-4b20-b3e0-cdf9b2499e65
+		summarizeBy: none
+		sourceColumn: product_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column tag
+		dataType: string
+		lineageTag: c74137c2-f223-4a7d-abd2-d7d057255940
+		summarizeBy: none
+		sourceColumn: tag
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public tags' = m
+		mode: import
+		source =
+				let
+				  Źródło = PostgreSQL.Database(ServerAddress, "postgres"),
+				  #"Nawigacja 1" = Źródło{[Schema = "public", Item = "tags"]}[Data]
+				in
+				  #"Nawigacja 1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

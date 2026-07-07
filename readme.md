@@ -15,6 +15,7 @@ flowchart LR
     T -->|normalize to 4 tables| L[Load]
     L --> P[(PostgreSQL)]
     L --> C[CSV]
+    P --> PB[Power BI]
 ```
 
 ## Setup
@@ -59,3 +60,11 @@ python main.py
 ```bash
 pytest
 ```
+
+## Analytics (Power BI)
+
+The pipeline's PostgreSQL output feeds an interactive Power BI report — a star-schema
+model with DAX measures across 3 pages (Overview, Pricing, Ratings). See
+[powerbi/README.md](powerbi/README.md) for the data model, measures, and findings.
+
+![Overview](powerbi/screenshots/overview.png)

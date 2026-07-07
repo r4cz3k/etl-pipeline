@@ -1,0 +1,224 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "66efccd03875a8e07132",
+  "position": {
+    "x": 622.26804123711338,
+    "y": 468.86597938144331,
+    "z": 5000,
+    "height": 251.13402061855669,
+    "width": 439.17525773195877,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "public products"
+                    }
+                  },
+                  "Property": "title"
+                }
+              },
+              "queryRef": "public products.title",
+              "nativeQueryRef": "title"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "public products"
+                    }
+                  },
+                  "Property": "price"
+                }
+              },
+              "queryRef": "Sum(public products.price)",
+              "nativeQueryRef": "price"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "public products"
+                    }
+                  },
+                  "Property": "discountPercentage"
+                }
+              },
+              "queryRef": "Sum(public products.discountPercentage)",
+              "nativeQueryRef": "discountPercentage"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "public products"
+                    }
+                  },
+                  "Property": "rating"
+                }
+              },
+              "queryRef": "Sum(public products.rating)",
+              "nativeQueryRef": "rating"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "public products"
+                  }
+                },
+                "Property": "price"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnFormatting": [
+        {
+          "properties": {
+            "dataBars": {
+              "positiveColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'#67d4cc'"
+                      }
+                    }
+                  }
+                }
+              },
+              "negativeColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'minColor'"
+                      }
+                    }
+                  }
+                }
+              },
+              "axisColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'foreground'"
+                      }
+                    }
+                  }
+                }
+              },
+              "reverseDirection": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "hideText": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "totalMatchingOption": {
+                "expr": {
+                  "Literal": {
+                    "Value": "1L"
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(public products.price)"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "b5be782ceecd210c45e0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "public products"
+              }
+            },
+            "Property": "title"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "880ad1a3d63dc3d9fd58",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "public products"
+              }
+            },
+            "Property": "price"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ba77952285f64ebdf902",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "public products"
+              }
+            },
+            "Property": "discountPercentage"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4c4c4c5b3ab7a5203b57",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "public products"
+              }
+            },
+            "Property": "rating"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

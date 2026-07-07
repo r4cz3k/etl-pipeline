@@ -1,0 +1,23 @@
+model Model
+	culture: pl-PL
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pl-PL
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["public images","public products","public reviews","public tags","dim_category","ServerAddress"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'public images'
+ref table 'public products'
+ref table 'public reviews'
+ref table 'public tags'
+ref table dim_category
+ref table Mesures
+
+ref cultureInfo pl-PL
+

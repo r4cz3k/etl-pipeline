@@ -1,0 +1,212 @@
+table 'public products'
+	lineageTag: b59508ac-31c4-4d5e-a58e-237269929839
+
+	column id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5ee4dd0e-ef36-4124-8700-b08664617c7e
+		summarizeBy: none
+		sourceColumn: id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column title
+		dataType: string
+		lineageTag: 7d3f1e60-7b87-4b3a-b153-0234c586d647
+		summarizeBy: none
+		sourceColumn: title
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: 8bc1862f-a169-431e-a688-88e3a591e2cd
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		isHidden
+		lineageTag: 8094d3aa-7477-4ae8-9d9f-3f5956c764ed
+		summarizeBy: none
+		sourceColumn: category
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column price
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 686e1172-2a29-4bf0-b613-24c81fb0f0b3
+		summarizeBy: sum
+		sourceColumn: price
+
+		annotation SummarizationSetBy = Automatic
+
+	column discountPercentage
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: be3c7559-b319-47f6-b27d-d105cc66f077
+		summarizeBy: sum
+		sourceColumn: discountPercentage
+
+		annotation SummarizationSetBy = Automatic
+
+	column rating
+		dataType: double
+		formatString: 0.00
+		lineageTag: 2ed19002-7260-48fc-ae84-bac2a948dc5c
+		summarizeBy: sum
+		sourceColumn: rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column stock
+		dataType: int64
+		formatString: 0
+		lineageTag: 0dcd5f33-2f08-400b-a5bb-3433004d722c
+		summarizeBy: sum
+		sourceColumn: stock
+
+		annotation SummarizationSetBy = Automatic
+
+	column brand
+		dataType: string
+		lineageTag: 0a2bc84f-87ab-4883-839a-c1822319b64f
+		summarizeBy: none
+		sourceColumn: brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		lineageTag: d72584c2-119e-4c38-b70c-6299de1998c3
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column weight
+		dataType: int64
+		formatString: 0
+		lineageTag: 44f13459-4862-4d45-a6c5-e5b61e120af6
+		summarizeBy: sum
+		sourceColumn: weight
+
+		annotation SummarizationSetBy = Automatic
+
+	column warrantyInformation
+		dataType: string
+		lineageTag: 3f2ddef0-1ca1-4d79-8714-7d3f685b6af6
+		summarizeBy: none
+		sourceColumn: warrantyInformation
+
+		annotation SummarizationSetBy = Automatic
+
+	column shippingInformation
+		dataType: string
+		lineageTag: d72633fa-b583-44cf-a5e0-d2cd4c3737f3
+		summarizeBy: none
+		sourceColumn: shippingInformation
+
+		annotation SummarizationSetBy = Automatic
+
+	column availabilityStatus
+		dataType: string
+		lineageTag: 14ae2f42-422f-44c6-93ac-97ac2f3669b8
+		summarizeBy: none
+		sourceColumn: availabilityStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column returnPolicy
+		dataType: string
+		lineageTag: 2dc19a67-2d11-49f4-85d4-aed1b407df63
+		summarizeBy: none
+		sourceColumn: returnPolicy
+
+		annotation SummarizationSetBy = Automatic
+
+	column minimumOrderQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 69a89b2f-3dcf-42d5-8c27-aabb77b42e81
+		summarizeBy: sum
+		sourceColumn: minimumOrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column thumbnail
+		dataType: string
+		lineageTag: b29dd7db-200a-4aec-a4c5-c0083042e062
+		summarizeBy: none
+		sourceColumn: thumbnail
+
+		annotation SummarizationSetBy = Automatic
+
+	column dimensions_width
+		dataType: double
+		formatString: 0.00
+		lineageTag: 25ca0929-c2b9-48f4-945a-c7b4e954c7ac
+		summarizeBy: sum
+		sourceColumn: dimensions_width
+
+		annotation SummarizationSetBy = Automatic
+
+	column dimensions_height
+		dataType: double
+		formatString: 0.00
+		lineageTag: 2b2cb69a-46ff-4b55-905b-7980aabe260f
+		summarizeBy: sum
+		sourceColumn: dimensions_height
+
+		annotation SummarizationSetBy = Automatic
+
+	column dimensions_depth
+		dataType: double
+		formatString: 0.00
+		lineageTag: 381fc2ff-8dbe-4c59-a986-f089820455b2
+		summarizeBy: sum
+		sourceColumn: dimensions_depth
+
+		annotation SummarizationSetBy = Automatic
+
+	column meta_barcode
+		dataType: string
+		lineageTag: 2a979ca5-339f-4dde-b82f-0615d10249c1
+		summarizeBy: none
+		sourceColumn: meta_barcode
+
+		annotation SummarizationSetBy = Automatic
+
+	column meta_qrCode
+		dataType: string
+		lineageTag: c5c4ffe6-99ec-46d1-a020-5b6206f7bd97
+		summarizeBy: none
+		sourceColumn: meta_qrCode
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public products' = m
+		mode: import
+		source =
+				let
+				  Źródło = PostgreSQL.Database(ServerAddress, "postgres"),
+				  #"Nawigacja 1" = Źródło{[Schema = "public", Item = "products"]}[Data],
+				    #"Zamieniono wartość" = Table.ReplaceValue(#"Nawigacja 1",null,"Unknown",Replacer.ReplaceValue,{"brand"}),
+				    #"Usunięto kolumny" = Table.RemoveColumns(#"Zamieniono wartość",{"meta_createdAt", "meta_updatedAt"}),
+				    #"Kolumna używana podczas dzielenia" = Table.TransformColumns(#"Usunięto kolumny", {{"discountPercentage", each _ / 100, type number}}),
+				    #"Zmieniono typ" = Table.TransformColumnTypes(#"Kolumna używana podczas dzielenia",{{"discountPercentage", Percentage.Type}})
+				in
+				    #"Zmieniono typ"
+
+	annotation PBI_NavigationStepName = Nawigacja
+
+	annotation PBI_ResultType = Table
+

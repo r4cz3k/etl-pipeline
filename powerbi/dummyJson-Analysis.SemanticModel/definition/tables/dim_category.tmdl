@@ -1,0 +1,25 @@
+table dim_category
+	lineageTag: fab537ce-23cd-4cf4-8fa8-2543c0848dee
+
+	column category
+		dataType: string
+		lineageTag: 47aa536b-d787-4885-83b2-7d1f5cdc143d
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_category = m
+		mode: import
+		source =
+				let
+				    Źródło = #"public products",
+				    #"Usunięto kolumny" = Table.RemoveColumns(Źródło,{"id", "title", "description", "price", "discountPercentage", "rating", "stock", "brand", "sku", "weight", "warrantyInformation", "shippingInformation", "availabilityStatus", "returnPolicy", "minimumOrderQuantity", "thumbnail", "dimensions_width", "dimensions_height", "dimensions_depth", "meta_barcode", "meta_qrCode"}),
+				    #"Usunięto duplikaty" = Table.Distinct(#"Usunięto kolumny")
+				in
+				    #"Usunięto duplikaty"
+
+	annotation PBI_NavigationStepName = Nawigacja
+
+	annotation PBI_ResultType = Table
+

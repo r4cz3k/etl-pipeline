@@ -1,0 +1,36 @@
+table 'public images'
+	lineageTag: 16a3ddf6-2411-4269-b453-1ebc613cdd77
+
+	column product_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c1157827-a94f-4ee2-bdaa-321c26c9e60d
+		summarizeBy: none
+		sourceColumn: product_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column image_url
+		dataType: string
+		lineageTag: 54f85203-4956-4100-8892-979bc15e95fb
+		summarizeBy: none
+		sourceColumn: image_url
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public images' = m
+		mode: import
+		source =
+				let
+				  Źródło = PostgreSQL.Database(ServerAddress, "postgres"),
+				  #"Nawigacja 1" = Źródło{[Schema = "public", Item = "images"]}[Data]
+				in
+				  #"Nawigacja 1"
+
+	annotation PBI_NavigationStepName = Nawigacja
+
+	annotation PBI_ResultType = Table
+

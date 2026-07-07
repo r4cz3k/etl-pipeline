@@ -1,0 +1,94 @@
+table Mesures
+	lineageTag: 4196f7cb-1448-43ab-8efd-1bb00e6efa3a
+
+	measure 'Total Products' = COUNTROWS('public products')
+		formatString: 0
+		lineageTag: 5120b4a2-acb5-407e-a761-691239ef9ea4
+
+	measure 'Total Categories' = DISTINCTCOUNT('public products'[category])
+		formatString: 0
+		lineageTag: d6c0ac01-828d-42dd-a663-847a36486f06
+
+	measure 'Avg Price' = AVERAGE('public products'[price])
+		lineageTag: fea610a9-9f46-47f2-9858-22858c813a6c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Rating' = AVERAGE('public products'[rating])
+		lineageTag: bb3d447c-f2ff-4c86-bda5-894213299247
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Stock Value' = SUMX('public products', 'public products'[stock] * 'public products'[price])
+		lineageTag: e818ba5b-c6a7-432e-ac54-6512ad80b071
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% of Stock Value' =
+			
+			DIVIDE(
+			    [Stock Value],
+			    CALCULATE([Stock Value], ALL(dim_category[category]))
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: f27434d7-9f73-4fdb-b68a-295babded75c
+
+	measure 'Category Rank by Rating' =
+			
+			RANKX(
+			    ALL(dim_category[category]),
+			    [Avg Rating]
+			)
+		formatString: 0
+		lineageTag: d552c48b-0d3a-4f94-95fe-7db8b043274c
+
+	measure '% Positive Reviews' =
+			
+			DIVIDE(
+			    CALCULATE(COUNTROWS('public reviews'), 'public reviews'[rating] >= 4),
+			    COUNTROWS('public reviews')
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 7805890c-11f2-47ef-9684-817fd58d4e72
+
+	measure 'Discounted Price' =
+			
+			SUMX(
+			    'public products',
+			    'public products'[price] * (1 - 'public products'[discountPercentage])
+			)
+		lineageTag: a5a06090-758e-4b26-99e6-d9ef2ca27b78
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Discount' = AVERAGE('public products'[discountPercentage])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 608b743e-76dc-427d-9921-e7ece8d2ca9d
+
+	measure 'Weighted Avg Rating' =
+			
+			DIVIDE(
+			    SUMX('public reviews', 'public reviews'[rating]),
+			    COUNTROWS('public reviews')
+			)
+		lineageTag: a0cd0353-43c8-481d-8f4b-87e06736fd1c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		formatString: 0
+		lineageTag: b515ddb5-67fc-4184-92d8-a0892c5b9c63
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Mesures = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 37e9c158503d4677b303078d89a7b42b
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

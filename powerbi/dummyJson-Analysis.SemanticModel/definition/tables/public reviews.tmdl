@@ -1,0 +1,62 @@
+table 'public reviews'
+	lineageTag: 998f573e-2938-4c0a-beb8-834e6e4bf813
+
+	column product_id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3091131c-74d6-4dba-85dc-f92887502fc3
+		summarizeBy: none
+		sourceColumn: product_id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column rating
+		dataType: int64
+		formatString: 0
+		lineageTag: 49c670bf-b905-442b-b38c-cd7ee8650190
+		summarizeBy: sum
+		sourceColumn: rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment
+		dataType: string
+		lineageTag: b15936f6-0722-4e9f-b0e6-a6c65847847b
+		summarizeBy: none
+		sourceColumn: comment
+
+		annotation SummarizationSetBy = Automatic
+
+	column reviewerName
+		dataType: string
+		lineageTag: 7e59013e-1c41-4a89-b2e0-00ce09716c35
+		summarizeBy: none
+		sourceColumn: reviewerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column reviewerEmail
+		dataType: string
+		lineageTag: 1282102a-9445-4c32-8201-fb9369e74f24
+		summarizeBy: none
+		sourceColumn: reviewerEmail
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'public reviews' = m
+		mode: import
+		source =
+				let
+				  Źródło = PostgreSQL.Database(ServerAddress, "postgres"),
+				  #"Nawigacja 1" = Źródło{[Schema = "public", Item = "reviews"]}[Data],
+				    #"Usunięto kolumny" = Table.RemoveColumns(#"Nawigacja 1",{"date"})
+				in
+				  #"Usunięto kolumny"
+
+	annotation PBI_NavigationStepName = Nawigacja
+
+	annotation PBI_ResultType = Table
+
